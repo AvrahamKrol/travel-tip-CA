@@ -70,6 +70,7 @@ function renderLocs(locs) {
 
 function onRemoveLoc(locId) {
     locService.remove(locId)
+    var remove = confirm('Are you sure you want to remove this location?')
         .then(() => {
             flashMsg('Location removed')
             unDisplayLoc()

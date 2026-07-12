@@ -1,88 +1,89 @@
 # TravelTip
-#### The app that gets you somewhere
 
+A simple web app for saving and managing favorite travel locations on a map.
 
 ## Description
-TravelTip is an app that keeps a list of favorite locations
+TravelTip lets users keep a list of locations, view them on a map, and manage them easily.
 
 ## Main Features
-- The app allows the user to keep and manage locations
-- The user can also search for an address and pan the map to that point
-- The User can pan the map to his own geo-location
+- Save and manage locations
+- Search for an address and move the map to that place
+- Find the user's current location
+- View the creation and update time for each location
+- Filter locations by time range: last day, last week, last month, or last year
+- Sort and filter locations by text and rating
 
-## Locations CRUDL 
-- Create – click on the map prompts for name and rate
-- Read – Selected location details (see below) 
-- Update – can update location rate
-- Delete – can delete a location
-- List - Including filtering, sorting and grouping
+## Location Actions
+- Create: click on the map and enter a name and rating
+- Read: view the selected location details
+- Update: change the location rating
+- Delete: before removing a location, the app asks: "Are you sure you want to remove this location?"
+- List: see all saved locations with filtering, sorting, and grouping
 
 ## Selected Location
-- Displayed in the header
-- Location is active in the list (gold color)
-- Marker on the map
-- Reflected in query params 
-- Copy url to clipboard
-- Share via Web-Share API
+When a location is selected, the app shows:
+- the location name
+- the address
+- the rating
+- a marker on the map
+- the current URL in the clipboard area
+- sharing options through the browser
 
-## Location
-Here is the format of the location object:
+## Location Object Example
 ```js
 {
-    id: 'GEouN',
-    name: 'Dahab, Egypt',
-    rate: 5,
-    geo: {
-      address: 'Dahab, South Sinai, Egypt',
-      lat: 28.5096676,
-      lng: 34.5165187,
-      zoom: 11
-    },
-    createdAt: 1706562160181,
-    updatedAt: 1706562160181
-  }
-  ```
+  id: 'GEouN',
+  name: 'Dahab, Egypt',
+  rate: 5,
+  geo: {
+    address: 'Dahab, South Sinai, Egypt',
+    lat: 28.5096676,
+    lng: 34.5165187,
+    zoom: 11
+  },
+  createdAt: 1706562160181,
+  updatedAt: 1706562160181
+}
+```
+
 ## Services
 ```js
 export const locService = {
-    query,
-    getById,
-    remove,
-    save,
-    setFilterBy,
-    setSortBy,
-    getLocCountByRateMap
+  query,
+  getById,
+  remove,
+  save,
+  setFilterBy,
+  setSortBy,
+  getLocCountByRateMap
 }
 
 export const mapService = {
-    initMap,
-    getPosition,
-    setMarker,
-    panTo,
-    lookupAddressGeo,
-    addClickListener
+  initMap,
+  getPosition,
+  setMarker,
+  panTo,
+  lookupAddressGeo,
+  addClickListener
 }
 ```
 
 ## Controller
 ```js
-// To make things easier in this project structure 
-// functions that are called from DOM are defined on a global app object
-
 window.app = {
-    onRemoveLoc,
-    onUpdateLoc,
-    onSelectLoc,
-    onPanToUserPos,
-    onSearchAddress,
-    onCopyLoc,
-    onShareLoc,
-    onSetSortBy,
-    onSetFilterBy
+  onRemoveLoc,
+  onUpdateLoc,
+  onSelectLoc,
+  onPanToUserPos,
+  onSearchAddress,
+  onCopyLoc,
+  onShareLoc,
+  onSetSortBy,
+  onSetFilterBy
 }
 ```
 
-Here is a sample usage:
+## Example Usage
 ```html
 <button onclick="app.onCopyLoc()">Copy location</button>
 <button onclick="app.onShareLoc()">Share location</button>

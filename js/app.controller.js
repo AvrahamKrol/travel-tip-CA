@@ -225,10 +225,13 @@ function getFilterByFromQueryParams() {
     const queryParams = new URLSearchParams(window.location.search)
     const txt = queryParams.get('txt') || ''
     const minRate = queryParams.get('minRate') || 0
-    locService.setFilterBy({txt, minRate})
+    const time = queryParams.get('time') || ''
+    locService.setFilterBy({ txt, minRate: +minRate, time })
 
     document.querySelector('input[name="filter-by-txt"]').value = txt
     document.querySelector('input[name="filter-by-rate"]').value = minRate
+    const elTimeFilter = document.querySelector('select[name="filter-by-time"]')
+    if (elTimeFilter) elTimeFilter.value = time
 }
 
 function getLocIdFromQueryParams() {
@@ -255,8 +258,13 @@ function onSetSortBy() {
     loadAndRenderLocs()
 }
 
-function onSetFilterBy({ txt, minRate }) {
-    const filterBy = locService.setFilterBy({ txt, minRate: +minRate })
+function onSetFilterBy({ txt, minRate, time } = {}) {
+    const filterBy = locService.setFilterBy({
+        txt,
+        minRate: minRate !== undefined ? +minRate : undefined,
+        time
+    })
+    
     utilService.updateQueryParams(filterBy)
     loadAndRenderLocs()
 }

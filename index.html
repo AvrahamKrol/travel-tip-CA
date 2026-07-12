@@ -41,11 +41,27 @@
                                 onchange="this.title=this.value;app.onSetFilterBy({minRate: this.value})" />
                         </label>
                     </div>
+                    <div>
+                        <label>
+                            Created:
+                            <select name="filter-by-time" onchange="app.onSetFilterBy({time: this.value})">
+                                <option value="">Any time</option>
+                                <option value="day">Last day</option>
+                                <option value="week">Last week</option>
+                                <option value="month">Last month</option>
+                                <option value="year">Last year</option>
+                            </select>
+                        </label>
+                    </div>
+
+                      <div>
+                      
                     <p>
                         Sort by:
                         <select class="sort-by" onchange="app.onSetSortBy()">
                             <option value="name">Name</option>
                             <option value="rate" selected>Rate</option>
+                            <option value="time" selected>Time</option>
                         </select>
                         <label>
                             <input class="sort-desc" type="checkbox" oninput="app.onSetSortBy()" />
